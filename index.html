@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de QR Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+</head>
+    <body class="h-100 overflow-x-hidden">
+        <div class="container-fluid  h-100">
+            <!-- Botões de Seleção -->
+            <div class="row align-items-stretch vh-100">
+                <div class="col-md-7 col-lg-6 bg-primary d-flex flex-column">
+                    <div class="col-md-10 mx-auto d-flex flex-wrap py-5">
+                        <div class="mb-5">
+                            <h1 class="text-white text-uppercase fw-bolder align-self-start">Gerador de QR Code</h1>
+                            <div class="button-group">
+                                <button onclick="showField('text')" id="btnText" class="active btn btn-light rounded-0 fw-medium"><i class="fa-solid fa-link text-primary"></i> Link</button>
+                                <button onclick="showField('whatsapp')" id="btnWhatsapp" class="btn btn-light rounded-0 fw-medium"><i class="fa-brands fa-whatsapp text-primary"></i> WhatsApp</button>
+                                <button onclick="showField('wifi')" id="btnWifi" class="btn btn-light rounded-0 fw-medium"><i class="fa-solid fa-wifi text-primary"></i> Wi-Fi</button>
+                            </div>
+                        </div>
+                        <div class="w-100">
+                            <!-- Campo para Texto -->
+                            <div id="textField" class="field" style="display: block;">
+                                <input type="text" id="textInput" placeholder="Digite o seu Link">
+                            </div>
+                            <!-- Campo para WhatsApp -->
+                            <div id="whatsappField" class="field">
+                                <label for="phoneNumber" class="text-white">Digite o número de telefone:</label>
+                                <div class="d-flex">
+                                    <div class="form-group">
+                                        <select id="countryCode" style="height: 48px;">
+                                            <option value="+1">EUA (+1)</option>
+                                            <option value="+44">Reino Unido (+44)</option>
+                                            <option value="+55" selected>Brasil (+55)</option>
+                                            <option value="+91">Índia (+91)</option>
+                                            <option value="+81">Japão (+81)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group w-100">
+                                        <input type="text" id="phoneNumber" class="celular-mask" placeholder="(DDD) Número" maxlength="15">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="text-white">Digite a mensagem (opcional):</label>
+                                    <input type="text" id="message" placeholder="Olá!">
+                                </div>
+                            </div>
+                            <!-- Campo para Wi-Fi -->
+                            <div id="wifiField" class="field">
+                                <input type="text" id="ssidInput" placeholder="Nome da rede Wi-Fi (SSID)">
+                                <input type="text" id="passwordInput" placeholder="Senha">
+                                <select id="encryptionInput">
+                                    <option value="WPA">WPA/WPA2</option>
+                                    <option value="WEP">WEP</option>
+                                    <option value="nopass">Sem senha</option>
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-6 d-flex flex-column justify-content-center align-items-center py-5 bg-dark">
+                        <!-- Área do QR Code -->
+                        <div id="qrcode"></div>
+                        
+                        <div class="my-5 w-100 text-center">
+                            <img src="assets/img/qrcode.svg" alt="" id="img-qr">
+                            <div class="w-100 text-center my-3">
+                                <a id="downloadLink" class="download-btn btn btn-primary rounded-0 py-2 px-4" style="display: none;" download="qrcode.png"><i class="fa-solid fa-download"></i> Baixar QR Code</a>
+                            </div>
+                            <div class="text-center w-100">
+                                <!-- Botão para Gerar QR Code -->
+                                <button onclick="generateQRCode()" class="btn btn-primary rounded-0 py-2 px-4"><i class="fa-solid fa-eye"></i> Gerar QR Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+        <script src="assets/js/qrcode.min.js"></script>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="assets/js/jquery.mask.js"></script>
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>
