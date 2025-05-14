@@ -1,17 +1,17 @@
 // Máscara para o campo de número de telefone
-$(document).ready(function(){
+$(document).ready(function () {
     var SPMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
-    spOptions = {
-        onKeyPress: function(val, e, field, options) {
-            field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
     $('.celular-mask').mask(SPMaskBehavior, spOptions);
 });
 
- // Alternar entre campos
+// Alternar entre campos
 function showField(type) {
     const fields = ['text', 'whatsapp', 'wifi'];
     fields.forEach(field => {
@@ -35,7 +35,10 @@ function generateQRCode() {
     } else if (activeField.id === "whatsappField") {
         const countryCode = document.getElementById('countryCode').value;
         const phoneNumber = document.getElementById("phoneNumber").value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+        // ✅ Agora o campo é <textarea>, e "\n" será tratado por encodeURIComponent corretamente
         const message = document.getElementById("message").value;
+
         qrData = `https://wa.me/${countryCode}${phoneNumber}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
     } else if (activeField.id === "wifiField") {
         const ssid = document.getElementById("ssidInput").value;
