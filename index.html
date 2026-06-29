@@ -10,13 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <style>
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .button-group .btn { margin: 0; }
+        .col-left { overflow-y: auto; }
+    </style>
 </head>
 
 <body class="h-100 overflow-x-hidden">
-    <div class="container-fluid  h-100">
-        <!-- Botões de Seleção -->
+    <div class="container-fluid h-100">
         <div class="row align-items-stretch vh-100">
-            <div class="col-md-7 col-lg-6 bg-primary d-flex flex-column">
+            <div class="col-md-7 col-lg-6 bg-primary d-flex flex-column col-left">
                 <div class="col-md-10 mx-auto d-flex flex-wrap py-5">
                     <div class="mb-5">
                         <h1 class="text-white text-uppercase fw-bolder align-self-start">Gerador de QR Code</h1>
@@ -27,18 +36,29 @@
                                     class="fa-brands fa-whatsapp text-primary"></i> WhatsApp</button>
                             <button onclick="showField('wifi')" id="btnWifi" class="btn btn-light fw-medium"><i
                                     class="fa-solid fa-wifi text-primary"></i> Wi-Fi</button>
+                            <button onclick="showField('email')" id="btnEmail" class="btn btn-light fw-medium"><i
+                                    class="fa-solid fa-envelope text-primary"></i> Email</button>
+                            <button onclick="showField('sms')" id="btnSms" class="btn btn-light fw-medium"><i
+                                    class="fa-solid fa-comment-sms text-primary"></i> SMS</button>
+                            <button onclick="showField('pix')" id="btnPix" class="btn btn-light fw-medium"><i
+                                    class="fa-brands fa-pix text-primary"></i> Pix</button>
+                            <button onclick="showField('vcard')" id="btnVcard" class="btn btn-light fw-medium"><i
+                                    class="fa-solid fa-address-card text-primary"></i> Contato</button>
+                            <button onclick="showField('location')" id="btnLocation" class="btn btn-light fw-medium"><i
+                                    class="fa-solid fa-location-dot text-primary"></i> Localização</button>
                         </div>
                     </div>
                     <div class="w-100">
-                        <!-- Campo para Texto -->
+                        <!-- Link -->
                         <div id="textField" class="field" style="display: block;">
                             <input type="text" id="textInput" placeholder="Digite o seu Link"
                                 class="rounded-2 border-0 p-3">
                         </div>
-                        <!-- Campo para WhatsApp -->
+
+                        <!-- WhatsApp -->
                         <div id="whatsappField" class="field">
                             <label for="phoneNumber" class="text-white">Digite o número de telefone:</label>
-                            <div class="form-group d-flex ">
+                            <div class="form-group d-flex">
                                 <select id="countryCode" class="rounded-2 border-0 p-3 w-25 me-1">
                                     <option value="+1">🇺🇸 (+1)</option>
                                     <option value="+44">🇬🇧 (+44)</option>
@@ -50,12 +70,13 @@
                                     placeholder="(DDD) Número" maxlength="15">
                             </div>
                             <div class="form-group mt-2">
-                                <label for="message" class="text-white">Digite a mensagem (opcional):</label>
-                                <textarea id="message" placeholder="Olá, digite oque precisar"
+                                <label for="message" class="text-white">Mensagem (opcional):</label>
+                                <textarea id="message" placeholder="Olá, digite o que precisar"
                                     class="rounded-2 border-0 p-3 w-100" rows="4" style="resize: none;"></textarea>
                             </div>
                         </div>
-                        <!-- Campo para Wi-Fi -->
+
+                        <!-- Wi-Fi -->
                         <div id="wifiField" class="field">
                             <input type="text" id="ssidInput" placeholder="Nome da rede Wi-Fi (SSID)"
                                 class="rounded-2 border-0 p-3">
@@ -65,6 +86,70 @@
                                 <option value="WEP">WEP</option>
                                 <option value="nopass">Sem senha</option>
                             </select>
+                        </div>
+
+                        <!-- Email -->
+                        <div id="emailField" class="field">
+                            <input type="email" id="emailInput" placeholder="Email do destinatário"
+                                class="rounded-2 border-0 p-3">
+                            <input type="text" id="emailSubject" placeholder="Assunto (opcional)"
+                                class="rounded-2 border-0 p-3">
+                            <textarea id="emailBody" placeholder="Mensagem (opcional)"
+                                class="rounded-2 border-0 p-3 w-100" rows="4" style="resize: none;"></textarea>
+                        </div>
+
+                        <!-- SMS -->
+                        <div id="smsField" class="field">
+                            <label class="text-white">Número de telefone:</label>
+                            <div class="form-group d-flex">
+                                <select id="smsCountryCode" class="rounded-2 border-0 p-3 w-25 me-1">
+                                    <option value="+1">🇺🇸 (+1)</option>
+                                    <option value="+44">🇬🇧 (+44)</option>
+                                    <option value="+55" selected>🇧🇷 (+55)</option>
+                                    <option value="+91">🇮🇳 (+91)</option>
+                                    <option value="+81">🇯🇵 (+81)</option>
+                                </select>
+                                <input type="text" id="smsPhone" class="celular-mask rounded-2 border-0 p-3 w-100"
+                                    placeholder="(DDD) Número" maxlength="15">
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="smsMessage" class="text-white">Mensagem (opcional):</label>
+                                <textarea id="smsMessage" placeholder="Digite a mensagem"
+                                    class="rounded-2 border-0 p-3 w-100" rows="4" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Pix -->
+                        <div id="pixField" class="field">
+                            <input type="text" id="pixKey"
+                                placeholder="Chave Pix (CPF, email, telefone ou aleatória)"
+                                class="rounded-2 border-0 p-3">
+                            <input type="text" id="pixName" placeholder="Nome do recebedor"
+                                class="rounded-2 border-0 p-3">
+                            <input type="text" id="pixCity" placeholder="Cidade"
+                                class="rounded-2 border-0 p-3">
+                            <input type="number" id="pixValue" placeholder="Valor em R$ (opcional)"
+                                class="rounded-2 border-0 p-3" min="0" step="0.01">
+                        </div>
+
+                        <!-- Contato (vCard) -->
+                        <div id="vcardField" class="field">
+                            <input type="text" id="vcardName" placeholder="Nome completo"
+                                class="rounded-2 border-0 p-3">
+                            <input type="text" id="vcardPhone" class="celular-mask rounded-2 border-0 p-3"
+                                placeholder="(DDD) Número">
+                            <input type="email" id="vcardEmail" placeholder="Email (opcional)"
+                                class="rounded-2 border-0 p-3">
+                            <input type="text" id="vcardOrg" placeholder="Empresa (opcional)"
+                                class="rounded-2 border-0 p-3">
+                        </div>
+
+                        <!-- Localização -->
+                        <div id="locationField" class="field">
+                            <input type="number" id="locationLat" placeholder="Latitude (ex: -23.5505)"
+                                class="rounded-2 border-0 p-3" step="any">
+                            <input type="number" id="locationLng" placeholder="Longitude (ex: -46.6333)"
+                                class="rounded-2 border-0 p-3" step="any">
                         </div>
                     </div>
                 </div>
@@ -80,14 +165,12 @@
                             download="qrcode.png"><i class="fa-solid fa-download"></i> Baixar QR Code</a>
                     </div>
                     <div class="text-center w-100">
-                        <!-- Botão para Gerar QR Code -->
                         <button onclick="generateQRCode()" class="btn btn-primary py-2 px-4"><i
                                 class="fa-solid fa-eye"></i> Gerar QR Code</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
